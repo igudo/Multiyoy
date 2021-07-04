@@ -13,4 +13,9 @@ public class MultiYoyGame extends Game {
         gameScreen = new MainMenuScreen();
         setScreen(gameScreen);
     }
+
+    @Override
+    public void dispose() {
+        gameScreen.dispose();
+    }
 }
