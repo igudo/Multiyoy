@@ -9,15 +9,13 @@ import com.yiotro.multiyoy.model.Bg;
 
 public class MainMenuScreen implements Screen {
 
-    private Texture bgImg;
     private SpriteBatch batch;
     private Bg bg;
 
     @Override
     public void show() {
-        bgImg = new Texture(Gdx.files.internal("main_menu_background.png"));
         batch = new SpriteBatch();
-        bg = new Bg(bgImg, 0, 0, 500, 100);
+        bg = new Bg("main_menu_background.png", 0, 0, 1000, 1000);
     }
 
     @Override
@@ -52,7 +50,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-        bgImg.dispose();
+        bg.dispose();
         batch.dispose();
     }
 }
