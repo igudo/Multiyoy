@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.yiotro.multiyoy.Constants;
 import com.yiotro.multiyoy.MultiYoyGame;
 import com.yiotro.multiyoy.model.Bg;
+import com.yiotro.multiyoy.utils.NetWorker;
 
 import jdk.nashorn.internal.objects.Global;
 
@@ -33,6 +34,8 @@ public class MainMenuScreen implements Screen {
     private OrthographicCamera camera;
     private TextureAtlas atlas;
     protected Skin skin;
+
+    NetWorker netWorker;
 
     public static int row_height = Gdx.graphics.getWidth() / 12;
     public static int col_width = Gdx.graphics.getWidth() / 12;
@@ -53,6 +56,9 @@ public class MainMenuScreen implements Screen {
         camera.update();
 
         stage = new Stage(viewport, batch);
+
+        netWorker = new NetWorker();
+        new Thread(netWorker).start();
     }
 
     @Override
@@ -87,6 +93,7 @@ public class MainMenuScreen implements Screen {
         exitButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                netWorker.running = false;
                 Gdx.app.exit();
             }
         });
