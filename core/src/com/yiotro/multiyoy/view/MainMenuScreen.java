@@ -92,11 +92,11 @@ public class MainMenuScreen implements Screen {
         });
 
         //Add buttons to table
-        mainTable.add(playButton).width((float) (Gdx.graphics.getWidth() * 0.6));
+        mainTable.add(playButton).width((float) (Constants.WIDTH * 0.6));
         mainTable.row();
-        mainTable.add(optionsButton).space(20).width((float) (Gdx.graphics.getWidth() * 0.6));
+        mainTable.add(optionsButton).space(20).width((float) (Constants.WIDTH * 0.6));
         mainTable.row();
-        mainTable.add(exitButton).width((float) (Gdx.graphics.getWidth() * 0.6));
+        mainTable.add(exitButton).width((float) (Constants.WIDTH * 0.6));
         mainTable.center();
 //        mainTable.setDebug(true);
 

@@ -4,23 +4,37 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Polygon;
 
 public abstract class GameObject {
 
-    Rectangle bounds;
+    Polygon bounds;
     Sprite object;
     Texture texture;
 
     GameObject(Texture textureInternal, float x, float y, float w, float h) {
-        bounds = new Rectangle(x, y, w, h);
         texture = textureInternal;
+        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         object = new Sprite(texture);
+        object.setSize(w, h);
+        object.setPosition(x, y);
+        object.setOrigin(w / 2f, h / 2f);
+
+        bounds = new Polygon();
+        bounds.setVertices(new float[]{0f,0f, w, 0f, w,h, 0f, h});
+        bounds.setPosition(x, y);
+        bounds.setOrigin(w/2f, h/2f);
     }
 
     public void draw(SpriteBatch batch) {
-        object.setBounds(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
+        object.setPosition(bounds.getX(), bounds.getY());
+        object.setRotation(bounds.getRotation());
         object.draw(batch);
+    }
+
+    public Polygon getBounds() {
+        return bounds;
     }
 
     public void dispose() {
