@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Polygon;
 
 public abstract class GameObject {
@@ -12,11 +13,8 @@ public abstract class GameObject {
     Sprite object;
     Texture texture;
 
-    GameObject(Texture textureInternal, float x, float y, float w, float h) {
-        texture = textureInternal;
-        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        object = new Sprite(texture);
+    GameObject(TextureRegion textureRegion, float x, float y, float w, float h) {
+        object = new Sprite(textureRegion);
         object.setSize(w, h);
         object.setPosition(x, y);
         object.setOrigin(w / 2f, h / 2f);

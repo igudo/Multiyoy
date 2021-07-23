@@ -1,15 +1,14 @@
 package com.yiotro.multiyoy.model;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.yiotro.multiyoy.control.CarController;
 
 public class Car extends GameObject {
     private CarController carController;
-    public Car(String texturePath, float x, float y, float w, float h) {
-        super(new Texture(Gdx.files.internal(texturePath)), x, y, w, h);
+    public Car(TextureRegion textureRegion, float x, float y, float w, float h) {
+        super(textureRegion, x, y, w, h);
         carController = new CarController(bounds);
     }
 
