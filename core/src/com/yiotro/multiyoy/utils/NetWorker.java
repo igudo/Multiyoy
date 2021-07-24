@@ -49,7 +49,7 @@ public class NetWorker implements Runnable {
         }
         ret.setLength(ret.length() - 1);
         ret.append("\n");
-//        System.out.println("pushed:"+ ret.toString());
+        System.out.println("pushed:"+ ret.toString());
 //        System.out.println("pushed:"+ Arrays.toString(ret.toString().getBytes()));
         return ret.toString().getBytes();
     }
@@ -72,13 +72,14 @@ public class NetWorker implements Runnable {
         Gdx.app.log("NetWorker", "connected");
         auth();
         if (running) Gdx.app.log("NetWorker", "authed");
-//
-//        try {
-//            TimeUnit.MILLISECONDS.sleep(100);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+
         try {
+            TimeUnit.MILLISECONDS.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            System.out.println("HERE");
             socket.getOutputStream().write(floatToByte(myCarPos));
 
         } catch (IOException e) {
