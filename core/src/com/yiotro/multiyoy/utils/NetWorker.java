@@ -54,3 +54,7 @@ public class NetWorker implements Runnable {
         Gdx.app.log("NetWorker", "closed");
     }
 }
+
+// netWorker = new NetWorker();
+//        new Thread(netWorker).start();
+// NetWorker netWorker;

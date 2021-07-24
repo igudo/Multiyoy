@@ -35,8 +35,6 @@ public class MainMenuScreen implements Screen {
     private TextureAtlas atlas;
     protected Skin skin;
 
-    NetWorker netWorker;
-
     public static int row_height = Gdx.graphics.getWidth() / 12;
     public static int col_width = Gdx.graphics.getWidth() / 12;
 
@@ -56,9 +54,6 @@ public class MainMenuScreen implements Screen {
         camera.update();
 
         stage = new Stage(viewport, batch);
-
-        netWorker = new NetWorker();
-        new Thread(netWorker).start();
     }
 
     @Override
@@ -93,7 +88,6 @@ public class MainMenuScreen implements Screen {
         exitButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                netWorker.running = false;
                 Gdx.app.exit();
             }
         });
