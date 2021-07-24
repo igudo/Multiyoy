@@ -1,11 +1,10 @@
 package com.yiotro.multiyoy.model;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Bg extends GameObject {
-    public Bg(String texturePath, float x, float y, float w, float h) {
-        super(new Texture(Gdx.files.internal(texturePath)), x, y, w, h);
+    public Bg(TextureRegion textureRegion, float x, float y, float w, float h) {
+        super(textureRegion, x, y, w, h);
     }
 }

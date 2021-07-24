@@ -6,16 +6,17 @@ import com.yiotro.multiyoy.view.MainMenuScreen;
 
 public class MultiYoyGame extends Game {
 
-    private Screen gameScreen;
+    private Screen mainMenuScreen;
 
     @Override
     public void create() {
-        gameScreen = new MainMenuScreen();
-        setScreen(gameScreen);
+        mainMenuScreen = new MainMenuScreen();
+        setScreen(mainMenuScreen);
     }
 
     @Override
     public void dispose() {
-        gameScreen.dispose();
+        super.dispose();
+        mainMenuScreen.dispose();
     }
 }

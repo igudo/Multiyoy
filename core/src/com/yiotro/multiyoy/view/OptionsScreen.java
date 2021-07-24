@@ -5,57 +5,40 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.yiotro.multiyoy.Constants;
-import com.yiotro.multiyoy.MultiYoyGame;
+import com.yiotro.multiyoy.utils.OptionsScreenUI;
+
+import static com.yiotro.multiyoy.Constants.CAMERA_WIDTH;
 
 public class OptionsScreen implements Screen {
 
-    private Stage stage;
-    private SpriteBatch batch;
-    private Viewport viewport;
     private OrthographicCamera camera;
-    private TextureAtlas atlas;
-    protected Skin skin;
-
-    public OptionsScreen() {
-        atlas = new TextureAtlas("glassy/glassy-ui.atlas");
-        skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"), atlas);
-
-        batch = new SpriteBatch();
-        camera = new OrthographicCamera();
-        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
-        viewport.apply();
-
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
-        camera.update();
-
-        stage = new Stage(viewport, batch);
-    }
+    private SpriteBatch batch;
+    private OptionsScreenUI ui;
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
+        batch = new SpriteBatch();
+        ui = new OptionsScreenUI();
+        Gdx.input.setInputProcessor(ui.stage);
+        ui.rgb = new float[]{150/255f,150/255f,200/255f,1f};
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(150/255f,150/255f,200/255f,1);
+        Gdx.gl.glClearColor(ui.rgb[0], ui.rgb[1], ui.rgb[2], ui.rgb[3]);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glViewport(0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        stage.act();
-        stage.draw();
+        batch.begin();
+        batch.end();
+
+        ui.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
-        camera.update();
+        float aspectRatio = (float) height / width;
+        camera = new OrthographicCamera(CAMERA_WIDTH, CAMERA_WIDTH * aspectRatio);
     }
 
     @Override
@@ -75,7 +58,7 @@ public class OptionsScreen implements Screen {
 
     @Override
     public void dispose() {
-        skin.dispose();
-        atlas.dispose();
+        batch.dispose();
+        ui.dispose();
     }
 }

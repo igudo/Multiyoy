@@ -11,6 +11,8 @@ public class DesktopLauncher {
 		config.width = Constants.WIDTH;
 		config.height = Constants.HEIGHT;
 		config.title = Constants.TITLE;
+		config.foregroundFPS = 0;
+		config.vSyncEnabled = false;
 		new LwjglApplication(new MultiYoyGame(), config);
 	}
 }
