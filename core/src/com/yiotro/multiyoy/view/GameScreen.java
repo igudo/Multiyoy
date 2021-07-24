@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.yiotro.multiyoy.model.Car;
+import com.yiotro.multiyoy.model.MyCar;
 import com.yiotro.multiyoy.utils.Assets;
 import com.yiotro.multiyoy.utils.GameScreenUI;
+import com.yiotro.multiyoy.utils.NetWorker;
 
 
 import static com.yiotro.multiyoy.Constants.CAMERA_WIDTH;
@@ -18,10 +20,14 @@ public class GameScreen implements Screen {
 
     private SpriteBatch batch;
     private TextureAtlas textureAtlas;
-    private Car car;
+    private TextureAtlas otherTextureAtlas;
+    private MyCar myCar;
+    private Car otherCar;
     private OrthographicCamera camera;
     private Assets assets;
     private GameScreenUI ui;
+
+    NetWorker netWorker;
 
     public static float deltaCff;
 
@@ -30,9 +36,15 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         assets = new Assets();
         textureAtlas = assets.getManager().get("atlas1.atlas", TextureAtlas.class);
+        otherTextureAtlas = assets.getManager().get("atlas1.atlas", TextureAtlas.class);
         ui = new GameScreenUI();
         Gdx.input.setInputProcessor(ui.stage);
-        car = new Car(textureAtlas.findRegion("0"), 0, 0, 3f, 3f*CAR_WIDTH_RATIO);
+        myCar = new MyCar(textureAtlas.findRegion("0"), 0, 0, 3f, 3f*CAR_WIDTH_RATIO);
+        otherCar = new Car(otherTextureAtlas.findRegion("0"), -2f, -2f, 3f, 3f*CAR_WIDTH_RATIO);
+
+        // init tcp conn
+        netWorker = new NetWorker();
+        new Thread(netWorker).start();
     }
 
     @Override
@@ -45,8 +57,13 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        car.draw(batch);
+        myCar.draw(batch);
+        otherCar.draw(batch);
         batch.end();
+
+        // Sending current pos
+        netWorker.myCarPos = myCar.getPos();
+        otherCar.setPos(netWorker.otherCarPos[0]-2, netWorker.otherCarPos[1]-2, netWorker.otherCarPos[2]);
 
         ui.draw();
 
@@ -82,7 +99,8 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        car.dispose();
+        myCar.dispose();
+        otherCar.dispose();
         ui.dispose();
     }
 }

@@ -16,6 +16,10 @@ public class CarController {
         this.carBounds = carBounds;
     }
 
+    public Polygon getCarBounds() {
+        return carBounds;
+    }
+
 
     public void handle(){
         // speed
