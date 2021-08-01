@@ -14,11 +14,16 @@ public class OptionsScreen implements Screen {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private OptionsScreenUI ui;
+    private GameScreenManager gsm;
+
+    public OptionsScreen(GameScreenManager gameScreenManager){
+        gsm = gameScreenManager;
+    }
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        ui = new OptionsScreenUI();
+        ui = new OptionsScreenUI(gsm);
         Gdx.input.setInputProcessor(ui.stage);
         ui.rgb = new float[]{150/255f,150/255f,200/255f,1f};
     }

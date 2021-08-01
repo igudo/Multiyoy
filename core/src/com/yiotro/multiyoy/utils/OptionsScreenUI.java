@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.yiotro.multiyoy.Constants;
+import com.yiotro.multiyoy.view.GameScreenManager;
 import com.yiotro.multiyoy.view.MainMenuScreen;
 import com.yiotro.multiyoy.view.OptionsScreen;
 
@@ -22,20 +23,23 @@ public class OptionsScreenUI {
     private Label label;
     private TextureAtlas btn_atlas;
     private Skin btn_skin;
+    private Skin font_skin;
     private FitViewport viewport;
-    private MainMenuScreen mainMenuScreen;
     private Assets assets;
     private Table mainTable;
-    private OptionsScreen optionsScreen;
+    private GameScreenManager gsm;
 
     public float[] rgb;
 
-    public OptionsScreenUI() {
+    public OptionsScreenUI(GameScreenManager gameScreenManager) {
+        gsm = gameScreenManager;
+
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT);
         stage = new Stage(viewport);
 
         btn_atlas = new TextureAtlas("glassy/glassy-ui.atlas");
         btn_skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"), btn_atlas);
+        font_skin = new Skin(Gdx.files.internal("font/font.json"));
 
         //Create Table
         mainTable = new Table();
@@ -43,9 +47,11 @@ public class OptionsScreenUI {
         mainTable.top();
 
         //Create elements
-        Label label = new Label("Options", btn_skin);
-        label.setAlignment(Align.center);
-        label.setPosition(0, 0, Align.center);
+        Label optionLabel = new Label("Настройки", font_skin.get("default", Label.LabelStyle.class));
+        optionLabel.setColor(btn_skin.getColor("white"));
+        optionLabel.setAlignment(Align.center);
+        optionLabel.setPosition(0, 0, Align.center);
+        optionLabel.setFontScale(.6f);
 
         TextButton ezButton = new TextButton("EZZ", btn_skin);
         final TextButton optionButton = new TextButton("Option", btn_skin);
@@ -70,13 +76,12 @@ public class OptionsScreenUI {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                mainMenuScreen = new MainMenuScreen();
-                ((Game) Gdx.app.getApplicationListener()).setScreen(mainMenuScreen);
+                gsm.changeScreen(new MainMenuScreen(gsm));
             }
         });
 
         //Add elements to table
-        mainTable.add(label);
+        mainTable.add(optionLabel).spaceBottom(30);
         mainTable.row();
         mainTable.add(ezButton).width((float) (Constants.WIDTH * 0.6));
         mainTable.row();
@@ -102,6 +107,5 @@ public class OptionsScreenUI {
 
     public void dispose() {
         stage.dispose();
-        mainMenuScreen.dispose();
     }
 }

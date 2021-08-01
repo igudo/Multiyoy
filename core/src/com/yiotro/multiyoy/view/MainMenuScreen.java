@@ -14,14 +14,18 @@ public class MainMenuScreen implements Screen {
     private SpriteBatch batch;
     private OrthographicCamera camera;
     private MainMenuScreenUI ui;
+    private GameScreenManager gsm;
+
+    public MainMenuScreen(GameScreenManager gameScreenManager){
+        gsm = gameScreenManager;
+    }
 
     @Override
     public void show() {
-        ui = new MainMenuScreenUI();
+        ui = new MainMenuScreenUI(gsm);
         Gdx.input.setInputProcessor(ui.stage);
         batch = new SpriteBatch();
     }
-
 
     @Override
     public void render(float delta) {

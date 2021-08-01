@@ -2,6 +2,8 @@ package com.yiotro.multiyoy.utils;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -14,6 +16,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.yiotro.multiyoy.Constants;
 import com.yiotro.multiyoy.view.GameScreen;
+import com.yiotro.multiyoy.view.GameScreenManager;
 import com.yiotro.multiyoy.view.OptionsScreen;
 
 public class MainMenuScreenUI {
@@ -21,18 +24,20 @@ public class MainMenuScreenUI {
     public Stage stage;
     private TextureAtlas btn_atlas;
     private Skin btn_skin;
+    private Skin font_skin;
     private FitViewport viewport;
-    private GameScreen gameScreen;
-    private OptionsScreen optionsScreen;
-    private Assets assets;
     private Table mainTable;
+    private GameScreenManager gsm;
 
-    public MainMenuScreenUI() {
+    public MainMenuScreenUI(GameScreenManager gameScreenManager) {
+        gsm = gameScreenManager;
+
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT);
         stage = new Stage(viewport);
 
         btn_atlas = new TextureAtlas("glassy/glassy-ui.atlas");
         btn_skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"), btn_atlas);
+        font_skin = new Skin(Gdx.files.internal("font/font.json"));
 
         //Create Table
         mainTable = new Table();
@@ -40,9 +45,13 @@ public class MainMenuScreenUI {
         mainTable.top();
 
         //Create elements
-        Label label = new Label("MultiYoy", btn_skin);
-        label.setAlignment(Align.center);
-        label.setPosition(0, 0, Align.center);
+
+        Label gameName = new Label("MultiYoy", font_skin.get("default", Label.LabelStyle.class));
+        gameName.setColor(btn_skin.getColor("white"));
+        gameName.setAlignment(Align.center);
+        gameName.setPosition(0, 0, Align.center);
+        gameName.setFontScale(.6f);
+
 
         TextButton playButton = new TextButton("Play", btn_skin);
         TextButton optionsButton = new TextButton("Options", btn_skin);
@@ -52,28 +61,27 @@ public class MainMenuScreenUI {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gameScreen = new GameScreen();
-                ((Game) Gdx.app.getApplicationListener()).setScreen(gameScreen);
+                gsm.changeScreen(new GameScreen(gsm));
             }
         });
 
         optionsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                optionsScreen = new OptionsScreen();
-                ((Game) Gdx.app.getApplicationListener()).setScreen(optionsScreen);
+                gsm.changeScreen(new OptionsScreen(gsm));
             }
         });
 
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                gsm.dispose();
                 Gdx.app.exit();
             }
         });
 
         //Add elements to table
-        mainTable.add(label);
+        mainTable.add(gameName).spaceBottom(30);
         mainTable.row();
         mainTable.add(playButton).width((float) (Constants.WIDTH * 0.6));
         mainTable.row();
@@ -99,7 +107,6 @@ public class MainMenuScreenUI {
 
     public void dispose() {
         stage.dispose();
-        gameScreen.dispose();
-        optionsScreen.dispose();
+
     }
 }

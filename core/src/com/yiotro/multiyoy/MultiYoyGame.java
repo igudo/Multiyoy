@@ -1,22 +1,23 @@
 package com.yiotro.multiyoy;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 import com.yiotro.multiyoy.view.MainMenuScreen;
+import com.yiotro.multiyoy.view.GameScreenManager;
 
 public class MultiYoyGame extends Game {
 
-    private Screen mainMenuScreen;
+    private GameScreenManager gsm;
 
     @Override
     public void create() {
-        mainMenuScreen = new MainMenuScreen();
-        setScreen(mainMenuScreen);
+        gsm = new GameScreenManager(this);
+
+        gsm.setScreen(new MainMenuScreen(gsm));
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        mainMenuScreen.dispose();
+        gsm.dispose();
     }
 }
