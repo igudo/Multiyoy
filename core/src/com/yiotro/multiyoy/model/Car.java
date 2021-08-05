@@ -2,9 +2,9 @@ package com.yiotro.multiyoy.model;
 
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.yiotro.multiyoy.control.CarController;
+import com.yiotro.multiyoy.view.GameScreen;
 
 public class Car extends GameObject {
 
@@ -15,9 +15,8 @@ public class Car extends GameObject {
         carController = new CarController(bounds);
     }
 
-    @Override
-    public void draw(Batch batch) {
+    public void draw(GameScreen gameScreen, Batch batch) {
         super.draw(batch);
-        carController.handle();
+        carController.handle(gameScreen);
     }
 }

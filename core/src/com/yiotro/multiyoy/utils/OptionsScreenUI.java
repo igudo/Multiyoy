@@ -1,6 +1,5 @@
 package com.yiotro.multiyoy.utils;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -11,20 +10,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.yiotro.multiyoy.Constants;
 import com.yiotro.multiyoy.view.GameScreenManager;
 import com.yiotro.multiyoy.view.MainMenuScreen;
-import com.yiotro.multiyoy.view.OptionsScreen;
+
+import static com.yiotro.multiyoy.Constants.HEIGHT;
+import static com.yiotro.multiyoy.Constants.WIDTH;
 
 public class OptionsScreenUI {
 
     public Stage stage;
-    private Label label;
     private TextureAtlas btn_atlas;
     private Skin btn_skin;
     private Skin font_skin;
-    private FitViewport viewport;
+    private ExtendViewport viewport;
     private Assets assets;
     private Table mainTable;
     private GameScreenManager gsm;
@@ -34,7 +35,7 @@ public class OptionsScreenUI {
     public OptionsScreenUI(GameScreenManager gameScreenManager) {
         gsm = gameScreenManager;
 
-        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT);
+        viewport = new ExtendViewport(WIDTH, HEIGHT);
         stage = new Stage(viewport);
 
         btn_atlas = new TextureAtlas("glassy/glassy-ui.atlas");
@@ -100,7 +101,7 @@ public class OptionsScreenUI {
     }
 
     public void draw() {
-        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         stage.act();
         stage.draw();
     }

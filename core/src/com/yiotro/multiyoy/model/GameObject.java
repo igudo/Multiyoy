@@ -2,7 +2,6 @@ package com.yiotro.multiyoy.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Polygon;
 
@@ -10,10 +9,11 @@ public abstract class GameObject {
 
     Polygon bounds;
     Sprite object;
-    TextureRegion textureRegion;
+    public TextureRegion textureRegion;
 
-    GameObject(TextureRegion textureRegion, float x, float y, float w, float h) {
-        object = new Sprite(textureRegion);
+    GameObject(TextureRegion textureRegio, float x, float y, float w, float h) {
+        textureRegion = textureRegio;
+        object = new Sprite(textureRegio);
         object.setSize(w, h);
         object.setPosition(x, y);
         object.setOrigin(w / 2f, h / 2f);

@@ -17,11 +17,11 @@ public class CarController {
     }
 
 
-    public void handle(){
+    public void handle(GameScreen gameScreen){
         // speed
-        if (Gdx.input.isKeyPressed(Input.Keys.UP))
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) | gameScreen.ui.btnUpIsPressed)
             carSpeed += speedVelocity * GameScreen.deltaCff;
-        else if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+        else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) | gameScreen.ui.btnDownIsPressed)
             carSpeed -= speedVelocity * GameScreen.deltaCff;
         else
             carSpeed = downSpeed();
@@ -29,9 +29,9 @@ public class CarController {
         //
 
         // rotation
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) | gameScreen.ui.btnLeftIsPressed)
             carBounds.rotate(rotationSpeed * carSpeed * GameScreen.deltaCff);
-        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) | gameScreen.ui.btnRightIsPressed)
             carBounds.rotate(-rotationSpeed * carSpeed * GameScreen.deltaCff);
         //
 
