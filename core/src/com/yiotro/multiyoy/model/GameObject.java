@@ -11,9 +11,9 @@ public abstract class GameObject {
     Sprite object;
     public TextureRegion textureRegion;
 
-    GameObject(TextureRegion textureRegio, float x, float y, float w, float h) {
-        textureRegion = textureRegio;
-        object = new Sprite(textureRegio);
+    GameObject(TextureRegion textureRegion, float x, float y, float w, float h) {
+        this.textureRegion = textureRegion;
+        object = new Sprite(textureRegion);
         object.setSize(w, h);
         object.setPosition(x, y);
         object.setOrigin(w / 2f, h / 2f);

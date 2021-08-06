@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="5" height="5" tilewidth="1024" tileheight="1024" infinite="0" nextlayerid="5" nextobjectid="71">
+<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="5" height="5" tilewidth="1024" tileheight="1024" infinite="0" nextlayerid="5" nextobjectid="72">
  <tileset firstgid="1" source="Road.tsx"/>
  <layer id="1" name="ground" width="5" height="5">
   <data encoding="csv">
@@ -11,8 +11,11 @@
 </data>
  </layer>
  <objectgroup id="4" name="objects">
-  <object id="63" name="grass" x="1024" y="3072" width="1024" height="1024"/>
-  <object id="69" name="grass" x="2048" y="3072" width="1024" height="1024"/>
-  <object id="70" name="grass" x="3072" y="3072" width="1024" height="1024"/>
+  <object id="63" name="grass" x="1024" y="1024" width="1024" height="1024"/>
+  <object id="69" name="grass" x="2048" y="1024" width="1024" height="1024"/>
+  <object id="70" name="grass" x="3072" y="1024" width="1024" height="1024"/>
+  <object id="71" name="grass" x="1024" y="3072">
+   <polygon points="0,0 3072,0 3072,1024 0,1024"/>
+  </object>
  </objectgroup>
 </map>

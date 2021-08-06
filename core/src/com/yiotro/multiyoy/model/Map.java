@@ -3,11 +3,14 @@ package com.yiotro.multiyoy.model;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.FloatArray;
 import com.yiotro.multiyoy.view.GameScreen;
 
 
@@ -42,6 +45,16 @@ public class Map {
         rectangle.setWidth(rectangle.getWidth() * unitScale);
         rectangle.setHeight(rectangle.getHeight() * unitScale);
         return rectangle;
+    }
+
+    public Polygon getPolygon(PolygonMapObject polygonMapObject) {
+        Polygon polygon = new Polygon(polygonMapObject.getPolygon().getTransformedVertices());
+        FloatArray vertices = new FloatArray();
+        for (float value : polygon.getVertices()) {
+            vertices.add(value * unitScale);
+        }
+        polygon.setVertices(vertices.toArray());
+        return polygon;
     }
 
 

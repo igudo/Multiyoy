@@ -165,7 +165,9 @@ public class GameScreenUI {
         stage.act();
         stage.draw();
 
-        speedLabel.setText(String.valueOf(Math.round(gameScreen.car.carController.carSpeed * 1.0) / 1.0 ));
+        String speed = "Speed: " + String.valueOf(Math.round(gameScreen.car.carController.carSpeed * 1.0) / 1.0 );
+        String fps = "FPS: " + String.valueOf(Gdx.graphics.getFramesPerSecond());
+        speedLabel.setText(fps + "\n" + speed);
 
     }
 
