@@ -6,12 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.utils.FloatArray;
 import com.yiotro.multiyoy.control.CameraController;
 import com.yiotro.multiyoy.model.Car;
 import com.yiotro.multiyoy.model.DebugShapes;
@@ -60,7 +54,6 @@ public class GameScreen implements Screen {
         debugShapes = new DebugShapes(this);
         ui = new GameScreenUI(this);
         Gdx.input.setInputProcessor(ui.stage);
-
     }
 
     @Override
@@ -78,9 +71,8 @@ public class GameScreen implements Screen {
         batch.begin();
         car.draw(batch);
         batch.end();
-        ui.draw();
-
         debugShapes.draw();
+        ui.draw();
 
         cameraController.update();
         collisionDetector.update();

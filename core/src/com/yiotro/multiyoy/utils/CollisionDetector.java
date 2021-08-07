@@ -24,14 +24,14 @@ public class CollisionDetector {
             FloatArray car = new FloatArray(gS.car.realBound.getTransformedVertices());
             if (Intersector.intersectPolygons(object, car)) {
 
-                gS.car.carController.grassCollision = polygonMapObject.getName().equals("road");
+                gS.car.carController.roadCollision = polygonMapObject.getName().equals("road");
                 if (Intersector.intersectPolygonEdges(object, car)) {
-                    gS.car.carController.grassCollision = !polygonMapObject.getName().equals("road");
+                    gS.car.carController.roadCollision = !polygonMapObject.getName().equals("road");
                     gS.car.carController.emptyCollision = polygonMapObject.getName().equals("empty");
                 }
             }
             else {
-                gS.car.carController.grassCollision = false;
+                gS.car.carController.roadCollision = false;
                 gS.car.carController.emptyCollision = false;
             }
         }

@@ -9,10 +9,10 @@ import com.yiotro.multiyoy.view.GameScreen;
 public class CarController {
 
     public Polygon carBounds;
-    public float carSpeed = 0f, speedVelocity = 35f, speedMax = 40f;
+    public float carSpeed = 0f, acceleration = 35f, groundBraking = 70f, speedMax = 40f, groundSpeedMax = 20f;
     public float rotationSpeed = 10f;
 
-    public boolean grassCollision = false;
+    public boolean roadCollision = false;
     public boolean emptyCollision = false;
 
     public CarController(Polygon carBounds) {
@@ -23,12 +23,13 @@ public class CarController {
     public void handle(GameScreen gameScreen){
         // speed
         if (Gdx.input.isKeyPressed(Input.Keys.UP) | gameScreen.ui.btnUpIsPressed)
-            carSpeed += speedVelocity * GameScreen.deltaCff;
+            carSpeed += acceleration * GameScreen.deltaCff;
         else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) | gameScreen.ui.btnDownIsPressed)
-            carSpeed -= speedVelocity * GameScreen.deltaCff;
+            carSpeed -= acceleration * GameScreen.deltaCff;
         else
             carSpeed = downSpeed();
         carSpeed = sliceSpeed();
+        carSpeed = sliceSpeedOnGround();
         //
 
         // rotation
@@ -38,15 +39,21 @@ public class CarController {
             carBounds.rotate(-rotationSpeed * carSpeed * GameScreen.deltaCff);
         //
 
+        // CollideBorder
+
+        //
+
         carBounds.setPosition(carBounds.getX() + MathUtils.cosDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.deltaCff,
                                 carBounds.getY() + MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.deltaCff);
+
+
     }
 
     private float downSpeed() {
-        if (carSpeed > speedVelocity * GameScreen.deltaCff)
-            return carSpeed - speedVelocity * GameScreen.deltaCff;
-        else if (carSpeed < -speedVelocity * GameScreen.deltaCff)
-            return carSpeed + speedVelocity * GameScreen.deltaCff;
+        if (carSpeed > acceleration * GameScreen.deltaCff)
+            return carSpeed - acceleration * GameScreen.deltaCff;
+        else if (carSpeed < -acceleration * GameScreen.deltaCff)
+            return carSpeed + acceleration * GameScreen.deltaCff;
         return 0f;
     }
 
@@ -56,5 +63,16 @@ public class CarController {
         if (carSpeed < -speedMax)
             return -speedMax;
         return carSpeed;
+    }
+
+    private float sliceSpeedOnGround(){
+        if (!roadCollision) {
+            if (carSpeed > groundSpeedMax)
+                return carSpeed - groundBraking * GameScreen.deltaCff;
+            else {
+                return carSpeed;
+            }
+        }
+        else return carSpeed;
     }
 }

@@ -22,6 +22,8 @@ public class Map {
     public TiledMap map;
     public OrthogonalTiledMapRenderer renderer;
     public float[] spawnCoords;
+    public float mapWidth;
+    public float mapHeight;
     GameScreen gS;
 
 
@@ -31,10 +33,10 @@ public class Map {
         renderer = new OrthogonalTiledMapRenderer(map, unitScale);
 
         MapProperties prop = map.getProperties();
-        int mapWidth = prop.get("width", Integer.class);
-        int mapHeight = prop.get("height", Integer.class);
         int tilePixelWidth = prop.get("tilewidth", Integer.class);
         int tilePixelHeight = prop.get("tileheight", Integer.class);
+        mapWidth = prop.get("width", Integer.class) * tilePixelWidth * unitScale;
+        mapHeight = prop.get("height", Integer.class) * tilePixelHeight * unitScale;
 
         spawnCoords = new float[]{(1 * tilePixelWidth + tilePixelWidth / 2f) * unitScale, (5 * tilePixelHeight + tilePixelHeight / 2f) * unitScale};
     }

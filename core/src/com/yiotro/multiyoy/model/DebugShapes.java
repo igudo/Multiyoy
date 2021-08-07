@@ -30,7 +30,7 @@ public class DebugShapes {
 
     private void drawCar(){
         rgbShapeCar = new float[]{0 / 255f, 0 / 255f, 0 / 255f, 1};
-        if (gS.car.carController.grassCollision) {
+        if (gS.car.carController.roadCollision) {
             rgbShapeCar = new float[]{150 / 255f, 255 / 255f, 150 / 255f, 1};
         } else if (gS.car.carController.emptyCollision) {
             rgbShapeCar = new float[]{255 / 255f, 255 / 255f, 255 / 255f, 1};
@@ -48,7 +48,7 @@ public class DebugShapes {
             Polygon polygon = gS.map.getPolygon(polygonMapObject);
 
             rgbShapeMapObject = new float[]{100 / 255f, 100 / 255f, 100 / 255f, 1};
-            if (gS.car.carController.grassCollision) {
+            if (gS.car.carController.roadCollision) {
                 rgbShapeMapObject = new float[]{150 / 255f, 255 / 255f, 150 / 255f, 1};
             }
 

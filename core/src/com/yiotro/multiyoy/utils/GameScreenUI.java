@@ -141,7 +141,7 @@ public class GameScreenUI {
 
         mainTable.add(infoTable).expandX().fillX().pad(10);
         mainTable.row();
-        mainTable.add(controlTable).expand().fillX().pad(10).padBottom(50).bottom();
+        mainTable.add(controlTable).expand().fillX().pad(10).padBottom(10).bottom();
 
 //        stage.setDebugAll(true);
         addToStage();
