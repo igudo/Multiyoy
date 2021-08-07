@@ -8,9 +8,12 @@ import com.yiotro.multiyoy.view.GameScreen;
 
 public class CarController {
 
-    private Polygon carBounds;
-    public float carSpeed = 0f, speedVelocity = 35f, speedMax = 30f;
-    private float rotationSpeed = 10f;
+    public Polygon carBounds;
+    public float carSpeed = 0f, speedVelocity = 35f, speedMax = 40f;
+    public float rotationSpeed = 10f;
+
+    public boolean grassCollision = false;
+    public boolean emptyCollision = false;
 
     public CarController(Polygon carBounds) {
         this.carBounds = carBounds;

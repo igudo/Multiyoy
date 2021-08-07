@@ -4,14 +4,17 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Polygon;
+import com.yiotro.multiyoy.view.GameScreen;
 
 public abstract class GameObject {
 
+    GameScreen gS;
     Polygon bounds;
     Sprite object;
     public TextureRegion textureRegion;
 
-    GameObject(TextureRegion textureRegion, float x, float y, float w, float h) {
+    GameObject(GameScreen gameScreen, TextureRegion textureRegion, float x, float y, float w, float h) {
+        this.gS = gameScreen;
         this.textureRegion = textureRegion;
         object = new Sprite(textureRegion);
         object.setSize(w, h);

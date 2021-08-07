@@ -11,9 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.yiotro.multiyoy.Constants;
-import com.yiotro.multiyoy.view.GameScreenManager;
 import com.yiotro.multiyoy.view.MainMenuScreen;
 
 import static com.yiotro.multiyoy.Constants.HEIGHT;

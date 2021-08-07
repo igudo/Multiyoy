@@ -19,15 +19,15 @@ public class Car extends GameObject {
     public Polygon realBound;
     public CarController carController;
 
-    public Car(TextureRegion textureRegion, float x, float y, float w, float h) {
-        super(textureRegion, x, y, w, h);
+    public Car(GameScreen gameScreen, TextureRegion textureRegion, float x, float y, float w, float h) {
+        super(gameScreen, textureRegion, x, y, w, h);
         realBound = getRealBound(w, h);
         realBound.setOrigin(w/2f, h/2f);
         carController = new CarController(bounds);
     }
 
-    public void draw(GameScreen gameScreen, Batch batch) {
-        carController.handle(gameScreen);
+    public void draw(Batch batch) {
+        carController.handle(gS);
         realBound.setPosition(bounds.getX(), bounds.getY());
         realBound.setRotation(bounds.getRotation());
         super.draw(batch);

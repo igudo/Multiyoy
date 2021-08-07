@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.yiotro.multiyoy.utils.GameScreenManager;
 import com.yiotro.multiyoy.utils.MainMenuScreenUI;
 
 import static com.yiotro.multiyoy.Constants.CAMERA_WIDTH;

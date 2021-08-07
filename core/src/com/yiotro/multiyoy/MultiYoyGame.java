@@ -2,7 +2,7 @@ package com.yiotro.multiyoy;
 
 import com.badlogic.gdx.Game;
 import com.yiotro.multiyoy.view.MainMenuScreen;
-import com.yiotro.multiyoy.view.GameScreenManager;
+import com.yiotro.multiyoy.utils.GameScreenManager;
 
 public class MultiYoyGame extends Game {
 
@@ -11,7 +11,6 @@ public class MultiYoyGame extends Game {
     @Override
     public void create() {
         gsm = new GameScreenManager(this);
-
         gsm.setScreen(new MainMenuScreen(gsm));
     }
 
